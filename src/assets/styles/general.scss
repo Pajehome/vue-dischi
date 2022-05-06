@@ -1,0 +1,19 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+//Fonts
+@import "~@fontsource/montserrat/index.css";
+@import "~@fontsource/montserrat/700.css";
+
+//Styles
+@import "./vars.scss";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+  font-family: $main-font;
+  background-color: $background;
+}
