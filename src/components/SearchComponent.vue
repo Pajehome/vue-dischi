@@ -1,7 +1,8 @@
 <template>
   <div class="container position-absolute top-0 my-4">
-    <select class="form-select text-secondary"  name="genre" id="genre" v-model="inputText">
-     <option value="" v-for="genre in selectGenre" :key="genre">{{genres}}</option>
+    <select class="form-select text-secondary"  name="genre" id="genre" v-model="inputText" @change="changeSearch">
+        <option value="">All</option>
+     <option :value="genre" v-for="genre in selectGenre" :key="genre">{{genre}}</option>
     </select>
   </div>
 </template>
@@ -14,7 +15,13 @@ export default {
          inputText: '',
      }
   },
-  props:['selectGenre']
+  props:['selectGenre'],
+  methods:{
+      changeSearch(){
+          this.$emit('search', this.inputText);
+          
+      }
+  }
 };
 </script>
 

@@ -1,9 +1,9 @@
 <template>
   <div class="container my-5">
-    <search-component :selectGenre="genres"/>
+    <search-component :selectGenre="genres" @search="mySearch"/>
     <div class="row">
       <div
-        v-for="(card, index) in cards"
+        v-for="(card, index) in filteredCard"
         :key="index"
         class="col-6 col-md-4 col-lg-3 mb-3">
         <CardComponent :item="card"/>
@@ -28,13 +28,25 @@ export default {
     return {
       cards: [],
       genres: [],
+      searchTxt:'',
     };
+  },
+  methods:{
+     mySearch(txt){
+       this.searchTxt = txt;
+     }
   },
   computed:{
     filteredCard(){
-      return {}
+        if(this.searchTxt === ''){
+          return this.cards
+        }
+        return this.cards.filter((item) => {
+         return item.genre === this.searchTxt;
+        })
+      }
     }
-  },
+  ,
   mounted() {
     axios
       .get("https://flynn.boolean.careers/exercises/api/array/music")
