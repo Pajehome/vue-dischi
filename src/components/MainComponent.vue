@@ -1,5 +1,6 @@
 <template>
   <div class="container my-5">
+    <search-component :selectGenre="genres"/>
     <div class="row">
       <div
         v-for="(card, index) in cards"
@@ -14,22 +15,37 @@
 <script>
 import axios from "axios";
 import CardComponent from "./CardComponent.vue"
+import SearchComponent from './SearchComponent.vue';
+
 
 export default {
   name: "MainComponent",
   components:{
-      CardComponent,
+    CardComponent,
+    SearchComponent,
   },
   data() {
     return {
       cards: [],
+      genres: [],
     };
+  },
+  computed:{
+    filteredCard(){
+      return {}
+    }
   },
   mounted() {
     axios
       .get("https://flynn.boolean.careers/exercises/api/array/music")
       .then((res) => {
         this.cards = res.data.response;
+        this.cards.forEach((item) => {
+          if(!this.genres.includes(item.genre)) {
+            this.genres.push(item.genre);
+            console.log(this.genres)
+          }
+        })
         console.log(res.data.response);
       })
       .catch((err) => {

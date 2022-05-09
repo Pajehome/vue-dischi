@@ -1,6 +1,6 @@
 <template>
   <nav class="row g-0">
-    <img src="/assets/img/spotify.png" alt="">
+    <img src="src/img/spotify.png" alt="">
   </nav>
 </template>
 
